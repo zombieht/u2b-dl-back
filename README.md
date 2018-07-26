@@ -4,4 +4,6 @@
 
 ## how to use
 
-编译运行后 调用loaclhost:8080/api/post 参数{"address":"url"}
+编译文件后运行或者直接运行go run main.go
+
+启动后 调用loaclhost:8080/api/post 参数{"address":"url"}
