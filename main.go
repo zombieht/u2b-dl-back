@@ -39,6 +39,27 @@ func main() {
 		c.JSON(http.StatusOK, json.Address)
 	})
 
+	router.GET("/api/get", func(c *gin.Context) {
+		path := `E:\go\play\`
+		err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
+			if f == nil {
+				return err
+			}
+			if f.IsDir() {
+				return nil
+			}
+			println(path)
+			return nil
+		})
+		if err != nil {
+			fmt.Println("Error: ", err)
+		}
+
+		//obj :=	"filepath.Walk() returned %v\n"
+		c.JSON(http.StatusOK, "ok")
+
+	})
+	
 	router.GET("/api/heroes", func(c *gin.Context) {
 		hero := []Hero{
 			// Id:     1,
