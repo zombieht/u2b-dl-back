@@ -26,12 +26,12 @@ type Path struct {
 func main() {
 	router := gin.Default()
 	// router.LoadHTMLGlob("/")
-	router.LoadHTMLFiles("index.html")
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl", gin.H{
-			"title": "index",
-		})
-	})
+// 	router.LoadHTMLFiles("index.html")
+// 	router.GET("/", func(c *gin.Context) {
+// 		c.HTML(http.StatusOK, "index.tmpl", gin.H{
+// 			"title": "index",
+// 		})
+// 	})
 
 	router.POST("/api/post", func(c *gin.Context) {
 		var json rq
@@ -51,7 +51,7 @@ func main() {
 		var result []Path
 
 		//获取路径
-		path := `./`
+		path := `/home`
 		err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
 			if f == nil {
 				return err
