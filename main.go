@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"fmt"
 	"os/exec"
+	//"io/ioutil"
 	"path/filepath"
 	"os"
 )
@@ -19,6 +20,7 @@ type Hero struct {
 
 type Path struct {
 	Path string `json:"path"`
+	Name string `json:"name"`
 }
 
 func main() {
@@ -46,8 +48,10 @@ func main() {
 	})
 
 	router.GET("/api/get", func(c *gin.Context) {
-		path := `E:\go\play\`
 		var result []Path
+
+		//获取路径
+		path := `E:\go\play\`
 		err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
 			if f == nil {
 				return err
@@ -55,9 +59,11 @@ func main() {
 			if f.IsDir() {
 				return nil
 			}
-			println(path)
+
+			//println(filepath.Base(path))
 			re := Path{
 				Path: path,
+				Name: filepath.Base(path),
 			}
 			result = append(result, re)
 			return nil
@@ -65,6 +71,20 @@ func main() {
 		if err != nil {
 			fmt.Println("Error: ", err)
 		}
+
+		//获取文件名
+		//files, _ := ioutil.ReadDir("./")
+		//for _, f := range files {
+		//	fmt.Println(f)
+		//	re := Path{
+		//		Path: f.Name(),
+		//	}
+		//	result = append(result, re)
+		//}
+
+		//获取文件名
+		//files2, _ := filepath.Glob("*")
+		//fmt.Println(files2)
 
 		//obj :=	"filepath.Walk() returned %v\n"
 		c.JSON(http.StatusOK, result)
