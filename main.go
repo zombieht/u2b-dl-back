@@ -51,7 +51,7 @@ func main() {
 		var result []Path
 
 		//获取路径
-		path := `E:\go\play\`
+		path := `./`
 		err := filepath.Walk(path, func(path string, f os.FileInfo, err error) error {
 			if f == nil {
 				return err
